@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+option go_package = "github.com/ladiesman2127/netconfig/api";
+
+package api;
+
+message UpdateHostnameRequest {
+    string newHostname = 1;
+}
+
+message AddDNSRequest {
+    string newDns = 1;
+}
+
+message DeleteDNSRequst {
+    string dnsToRemove = 1;
+}
+
+message Response {
+    bool error = 1;
+}
+
+message DnsListResponse {
+    repeated string addresses = 1;
+}
+
+message Empty {
+
+}
+
+service NetConfig {
+    rpc AddDns(AddDNSRequest) returns (Empty) {}
+    rpc DeleteDns(DeleteDNSRequst) returns (Empty) {}
+    rpc UpdateHostname(UpdateHostnameRequest) returns (Empty) {}
+    rpc GetAllDns(Empty) returns (DnsListResponse) {}
+}
